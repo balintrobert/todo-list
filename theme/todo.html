@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="custom.css" />
+    <script
+      src="https://kit.fontawesome.com/572f3dfeb6.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="todo-wrapper">
+      <div class="todo">
+        <nav class="navbar">
+          <h2 class="nav-brand"><i class="fas fa-clipboard-check"></i>Todos</h2>
+          <div class="nav-user">
+            <h4>Hello, Username</h4>
+            <button class="btn-logout">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        </nav>
+        <form action="" class="add-todo">
+          <input
+            class="todo-input"
+            type="text"
+            name="todo"
+            placeholder="Enter task"
+          />
+          <button class="todo-submit" type="submit">
+            <i class="fas fa-plus"></i>
+          </button>
+        </form>
+        <ul class="tasks">
+          <li class="task">
+            <span class="task-text">Task1</span>
+            <span class="actions">
+              <button><i class="fas fa-pen-square"></i></button>
+              <button><i class="fas fa-minus-square"></i></button>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
