@@ -8,19 +8,20 @@ import Alert from './components/layout/Alert';
 import PrivateRoute from './components/routing/PrivateRoute';
 import './App.css';
 import { loadUser } from './actions/auth';
+import { getTodos } from './actions/todo';
 import setAuthToken from './utils/setAuthToken';
 
 //  Redux
 import { Provider } from 'react-redux';
 import store from './store';
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
-
 const App = () => {
   useEffect(() => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     store.dispatch(loadUser());
+    getTodos();
   }, []);
 
   return (

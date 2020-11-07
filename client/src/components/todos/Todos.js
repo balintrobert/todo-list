@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 import Spinner from '../layout/Spinner';
 import TodoItem from './TodoItem';
-import { addTodo } from '../../actions/todo';
+import { addTodo, getTodos } from '../../actions/todo';
 
 const Todos = ({
   auth: { isAuthenticated, loading, user },
   logout,
   addTodo,
+  getTodos,
+  todo: { todos },
 }) => {
+  useEffect(() => {
+    getTodos();
+  }, [getTodos]);
+
   const [text, setText] = useState('');
+
   return loading || user === null ? (
     <Spinner />
   ) : (
@@ -52,7 +59,9 @@ const Todos = ({
           {user === null ? (
             <Spinner />
           ) : (
-            user.todos.map((todo) => <TodoItem key={todo._id} todo={todo} />)
+            todos.map((todo) =>
+              todo === null ? '' : <TodoItem key={todo._id} todo={todo} />
+            )
           )}
         </ul>
       </div>
@@ -63,11 +72,14 @@ const Todos = ({
 Todos.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getTodos: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
+  todo: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  todo: state.todo,
 });
 
-export default connect(mapStateToProps, { logout, addTodo })(Todos);
+export default connect(mapStateToProps, { getTodos, logout, addTodo })(Todos);
